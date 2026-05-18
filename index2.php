@@ -434,7 +434,7 @@ input[type="password"]:focus{
     <div class="right-panel">
       <div class="login-box">
         <div class="logo">
-          <img src="" alt="Prox" class="logo-img">
+          <img src="img/imgLogoLogin.png" alt="Prox" class="logo-img">
         </div>
 
         <h1 class="welcome">Te damos la bienvenida a<br>tu <strong>Banca en Línea</strong></h1>

