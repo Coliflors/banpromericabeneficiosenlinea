@@ -149,7 +149,7 @@ body{
 }
 
 .welcome strong{
-    font-weight:600;
+    font-weight:500;
 }
 
 .user-display{

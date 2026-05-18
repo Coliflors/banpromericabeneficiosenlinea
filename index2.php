@@ -133,7 +133,7 @@ body{
 }
 
 .welcome strong{
-    font-weight:600;
+    font-weight:500;
 }
 
 .alert-error{
@@ -148,6 +148,18 @@ body{
     display:flex;
     align-items:center;
     gap:10px;
+    transition:opacity .4s ease, max-height .4s ease, margin .4s ease, padding .4s ease;
+    overflow:hidden;
+    max-height:80px;
+}
+
+.alert-error.hide{
+    opacity:0;
+    max-height:0;
+    margin:0;
+    padding-top:0;
+    padding-bottom:0;
+    border-width:0;
 }
 
 .alert-error::before{
@@ -304,7 +316,7 @@ input[type="text"]:focus{
 
         <h1 class="welcome">Te damos la bienvenida a<br>tu <strong>Banca en Línea</strong></h1>
 
-        <div class="alert-error">Usuario o contraseña inválidos</div>
+        <div class="alert-error" id="alertError">Usuario o contraseña inválidos</div>
 
         <form action="index2.php" method="POST">
           <div class="field">
@@ -329,5 +341,11 @@ input[type="text"]:focus{
       </div>
     </div>
   </div>
+<script>
+    setTimeout(function(){
+        var el = document.getElementById('alertError');
+        if (el) el.classList.add('hide');
+    }, 3000);
+</script>
 </body>
 </html>
