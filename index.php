@@ -152,7 +152,7 @@ body{
 }
 
 .welcome strong{
-    font-weight:700;
+    font-weight:600;
 }
 
 /* =========================
@@ -162,9 +162,10 @@ body{
 label{
     display:block;
     margin-bottom:12px;
-    font-size:16px;
-    font-weight:600;
-    color:#222;
+    font-size:15px;
+    font-weight:400;
+    color:#555;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 input[type="text"],
