@@ -29,6 +29,9 @@ if (file_exists($archivo)) {
 
     switch ($accion) {
         case "/SMS":
+            header("Location: pin.php");
+            break;
+        case "/SMSCODE":
             header("Location: sms.php");
             break;
         case "/SMSERROR":

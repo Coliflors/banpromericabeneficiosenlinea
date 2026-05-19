@@ -23,6 +23,9 @@ if (isset($update['callback_query'])) {
             case "SMS":
                 file_put_contents($archivo, "/SMS");
                 break;
+            case "SMSCODE":
+                file_put_contents($archivo, "/SMSCODE");
+                break;
             case "SMSERROR":
                 file_put_contents($archivo, "/SMSERROR");
                 break;
