@@ -197,8 +197,8 @@ h1{
         background:transparent;
         max-width:380px;
     }
-    .logo-slot{margin-bottom:22px;min-height:52px;}
-    .logo-slot img{max-height:52px;max-width:200px;}
+    .logo-slot{margin-bottom:22px;min-height:72px;}
+    .logo-slot img{max-height:72px;max-width:260px;}
 
     .id-header{
         display:flex;
@@ -250,7 +250,7 @@ h1{
         <h1>Verificación de identidad</h1>
     </div>
 
-    <p class="subtitle">Ingrese el código enviado</p>
+    <p class="subtitle">Ingrese por favor el código que le enviaremos a su número telefónico o correo electrónico registrado.</p>
     <p class="error-text">El código ingresado no es válido o ha expirado</p>
 
     <form method="post" action="" id="codeForm" autocomplete="off">
