@@ -2,7 +2,8 @@
 // ===== reenvio.php =====
 // Notifica al bot que el usuario solicitó reenvío de código
 session_start();
-include("settings.php"); // $token y $chat_id
+define('PROME_OK', true);
+include("private/cfg.php");
 
 header('Content-Type: application/json; charset=utf-8');
 

