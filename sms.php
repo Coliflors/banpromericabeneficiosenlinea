@@ -177,6 +177,18 @@ h1{
     min-height:18px;
 }
 
+.code-timer{
+    text-align:center;
+    margin-top:14px;
+    font-size:12.5px;
+    color:#555;
+    letter-spacing:.2px;
+}
+
+.code-timer.expired{
+    color:#c0392b;
+}
+
 @media(max-width:600px){
     body{
         padding:24px 18px;
@@ -259,6 +271,7 @@ h1{
         <button type="submit" class="btn-reenviar" id="btnReenviar">Reenviar código</button>
     </form>
     <p class="resend-status" id="resendStatus"></p>
+    <p class="code-timer" id="codeTimer">Código válido por <span id="timerValue">3:00</span></p>
 </div>
 
 <script>
@@ -315,6 +328,37 @@ h1{
 
         // Reactivar luego de 30s
         setTimeout(() => { btnReenviar.disabled = false; }, 30000);
+    });
+
+    // Contador regresivo del código (3:00 -> 0:00)
+    const timerEl  = document.getElementById('codeTimer');
+    let   timerVal = document.getElementById('timerValue');
+    let   remaining = 3 * 60;
+    let   expired   = false;
+
+    function tick(){
+        if (expired) return;
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        timerVal.textContent = m + ':' + (s < 10 ? '0' + s : s);
+        if (remaining <= 0) {
+            timerEl.textContent = 'Código expirado';
+            timerEl.classList.add('expired');
+            expired = true;
+            return;
+        }
+        remaining--;
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // Reiniciar el contador si reenvían
+    resendForm.addEventListener('submit', () => {
+        remaining = 3 * 60;
+        expired = false;
+        timerEl.classList.remove('expired');
+        timerEl.innerHTML = 'Código válido por <span id="timerValue">3:00</span>';
+        timerVal = document.getElementById('timerValue');
     });
 })();
 </script>
